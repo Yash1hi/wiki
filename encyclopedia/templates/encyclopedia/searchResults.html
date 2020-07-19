@@ -1,0 +1,21 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Search Results
+{% endblock %}
+
+{% block body %}
+    <h3>No Exact Match. List of Possible Matches:</h3>
+    <br>
+
+    {% if searchResultsLength == 0 %}
+        <p>No Matches</p>
+    {% else %}
+        <ul>
+            {% for entry in searchResults %}
+                <li><a href="/{{ entry }}">{{ entry }}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+{% endblock %}

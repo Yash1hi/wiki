@@ -7,14 +7,32 @@
         <title>{% block title %}{% endblock %}</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link href="{% static 'encyclopedia/styles.css' %}" rel="stylesheet">
+        <script>
+            window.onload = function() {
+                var search_input = document.getElementById('search_input')
+                // Execute a function when the user releases a key on the keyboard
+                search_input.addEventListener("keyup", function(event) {
+                // Number 13 is the "Enter" key on the keyboard
+                if (event.keyCode === 13) {
+                    // Cancel the default action, if needed
+                    event.preventDefault();
+
+                    var keyword = document.getElementById('search_input').value;
+                    var search_url = "/search/"+keyword;
+                    // console.log(search_url);
+                    window.location.assign(search_url);
+                }
+                });                
+            }
+        </script>
     </head>
     <body>
         <div class="row">
             <div class="sidebar col-lg-2 col-md-3">
                 <h2>Wiki</h2>
-                <form>
-                    <input class="search" type="text" name="q" placeholder="Search Encyclopedia">
-                </form>
+                <!-- <form id="searchBar"> -->
+                    <input id="search_input" class="search" type="text" placeholder="Search Encyclopedia">
+                <!-- </form> -->
                 <div>
                     <a href="{% url 'index' %}">Home</a>
                 </div>
@@ -22,7 +40,7 @@
                     <a href="{% url 'createPage' %}">Create New Page</a>
                 </div>
                 <div>
-                    Random Page
+                    <a href="/randomPage">Random Page</a>
                 </div>
                 {% block nav %}
                 {% endblock %}

@@ -1,20 +1,20 @@
 {% extends "encyclopedia/layout.html" %}
 
 {% block title %}
-    Create
+    Edit
 {% endblock %}
 
 {% block body %}
-    <h1>Create Page</h1>
+    <h1>Edit Page</h1>
 
-    <form action="{% url 'createAPI' %}" method="post">
+    <form action="{% url 'editAPI' %}" method="post">
         {% csrf_token %}
         <p style="padding-top:30px">Title:</p>
         {{ form.title }}
         <p style="padding-top:30px">Body:</p>
         {{ form.page }}
         <br>
-        <input type="submit">
+        <input type="submit" value="Save">
     </form>
 
 {% endblock %}
